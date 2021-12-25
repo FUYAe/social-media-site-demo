@@ -4,38 +4,19 @@
       <span>|搜索</span>
       <br />
       <div>
-        <input class="input" type="text" placeholder="开始精彩搜索" /><i
-          class="el-icon-search"
-        ></i>
+        <input
+          class="input"
+          type="text"
+          @keyup.enter="searchMoth"
+          v-model="searchText"
+          placeholder="开始精彩搜索"
+        />
+        <i @click="searchMoth" class="el-icon-search"></i>
       </div>
     </div>
-    <div class="item2">
-      <p>生活就像骑自行车，不会自己倒，除非你不往前蹬。</p>
-      <p>
-        Life is like riding a bicycle, not falling on your own, unless you don't
-        go forward.
-      </p>
-    </div>
-    <div class="item3">
-      <img src="../assets/loginpng.png" alt="" />
-      <p>登录，添加你喜欢的词条！</p>
-      <el-row>
-        <el-button @click="showMessage" type="primary"
-          ><i class="el-icon-user"></i> 登录</el-button
-        >
-        <el-button @click="showMessage" type="success"
-          ><i class="el-icon-circle-plus-outline"></i> 注册</el-button
-        >
-      </el-row>
-    </div>
-    <div class="item4">
-      <p class="new-header">新发布</p>
-
-      <p
-        class="new-item"
-        v-for="item in $store.state.mainDatalight"
-        :key="item.cid"
-      >
+    <div v-if="searchResultIsShow" class="search-result">
+      <p class="search-item" v-if="searchIsNull">无结果</p>
+      <p class="search-item" v-for="item in finaldata" :key="item.cid">
         <router-link
           active-class="active"
           :to="{
@@ -45,14 +26,47 @@
             },
           }"
         >
-          <img
-            :src="item.logo"
-            width="15px"
-            height="15px"
-            alt="!"
-            style="margin-bottom: 2px"
-          />{{ item.name }}</router-link
+          <img :src="item.logo" width="15px" height="15px" alt="!" style="margin-bottom: 2px" />
+          {{ item.name }}
+        </router-link>
+      </p>
+    </div>
+
+    <div class="item2">
+      <p>生活就像骑自行车，不会自己倒，除非你不往前蹬。</p>
+      <p>
+        Life is like riding a bicycle, not falling on your own, unless you don't
+        go forward.
+      </p>
+    </div>
+    <div class="item3">
+      <img src="../assets/loginpng.png" alt />
+      <p>登录，添加你喜欢的词条！</p>
+      <el-row>
+        <el-button @click="showMessage" type="primary">
+          <i class="el-icon-user"></i> 登录
+        </el-button>
+        <el-button @click="showMessage" type="success">
+          <i class="el-icon-circle-plus-outline"></i> 注册
+        </el-button>
+      </el-row>
+    </div>
+    <div class="item4">
+      <p class="new-header">新发布</p>
+
+      <p class="new-item" v-for="item in $store.state.mainDatalight" :key="item.cid">
+        <router-link
+          active-class="active"
+          :to="{
+            name: 'detail',
+            params: {
+              id: item.cid,
+            },
+          }"
         >
+          <img :src="item.logo" width="15px" height="15px" alt="!" style="margin-bottom: 2px" />
+          {{ item.name }}
+        </router-link>
       </p>
     </div>
   </div>
@@ -60,7 +74,50 @@
 <script>
 export default {
   name: "HomeSideBar",
+  data() {
+    return {
+      searchText: "",
+      finaldata: [],
+      searchResultIsShow: false,
+      searchIsNull: false,
+    };
+  },
+  watch: {
+    searchText(newValue, oldValue) {
+      if (newValue == "") {
+        setTimeout(() => {
+          this.searchResultIsShow = false;
+        }, 4000);
+      }
+    },
+  },
   methods: {
+    searchMoth() {
+      if (this.searchText == "") return;
+      let data = this.$store.state.mainDatalight;
+      this.finaldata = data.filter((item) => {
+        return item.name.indexOf(this.searchText.trim()) != -1;
+      });
+      this.searchResultIsShow = true;
+      document
+        .getElementsByClassName("item1")[0]
+        .setAttribute("style", "margin-bottom: 10px;");
+      if (this.finaldata.length == 0) {
+        this.searchIsNull = true;
+      }
+      if (this.finaldata.length != 0) {
+        this.searchIsNull = false;
+      }
+      if (this.finaldata.length == 0) {
+        setTimeout(() => {
+          this.searchText = "";
+          this.searchResultIsShow = false;
+          document
+            .getElementsByClassName("item1")[0]
+            .setAttribute("style", "margin-bottom: 40px;");
+        }, 5000);
+      }
+    },
     showMessage() {
       this.$store.state.showMessage.show = true;
       this.$store.state.showMessage.message = "功能尚待完善，敬请期待！";
@@ -74,10 +131,8 @@ export default {
 };
 </script>
 <style scoped>
-.el-button {
-  margin: 15px;
-}
 .side-bar {
+  transition: 0.6s all ease;
   /* position: fixed;
   left: 984.5px;
   top: 48px; */
@@ -86,11 +141,15 @@ export default {
   /* background-color: #fff; */
   /* height: 1400px; */
 }
-.side-bar div {
+.side-bar > div {
   /* background-color: #fff; */
   /* height: 200px; */
   border-radius: 10px;
   margin-bottom: 40px;
+  transition: all 0.1s;
+}
+.side-bar > div:hover {
+  transform: scale(1.01);
 }
 /* item1 */
 .input {
@@ -127,6 +186,31 @@ export default {
 .item1 > div > i:hover {
   color: black;
 }
+.search-result {
+  transition: 0.6s all ease;
+  background-color: #fff;
+  box-shadow: 0 16px 48px #e7ebf6;
+  margin-top: 0px;
+  padding: 8px;
+  min-height: 40px;
+}
+/* item1-search-item */
+.search-item {
+  text-align: left;
+  text-indent: 2em;
+  line-height: 25px;
+  color: rgb(110, 110, 110);
+}
+.search-item > a {
+  text-align: left;
+  line-height: 25px;
+  color: rgb(110, 110, 110);
+}
+.search-item > a:hover {
+  color: rgb(73, 73, 73);
+}
+
+/* item2 */
 .item2 {
   padding: 20px;
   background-color: #fff;
@@ -137,6 +221,7 @@ export default {
   line-height: 23px;
   color: rgb(104, 100, 100);
 }
+/* item3 */
 .item3 {
   position: relative;
   box-shadow: 0 16px 48px #e7ebf6;
@@ -162,6 +247,7 @@ export default {
   border-radius: 10px;
   margin-bottom: 20px;
 }
+/* item4 */
 .item4 {
   margin-top: 15px;
   background-color: #fff;
@@ -190,6 +276,7 @@ export default {
 .item4 > .new-item > a:hover {
   color: rgb(73, 73, 73);
 }
+
 ::-moz-placeholder {
   color: rgb(212, 208, 208);
 }
@@ -201,6 +288,9 @@ export default {
 }
 :-ms-input-placeholder {
   color: rgb(212, 208, 208);
+}
+.el-button {
+  margin: 15px;
 }
 @media (max-width: 800px) {
   .side-bar {

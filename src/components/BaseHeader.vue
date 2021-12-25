@@ -8,10 +8,12 @@
       </div>
       <div class="phone-show phone-input-outer">
         <input
+          type="text"
+          v-model="searchText"
           class="phone-show phone-input"
           placeholder="开始精彩搜索"
           suffix-icon="el-icon-search"
-        /><i class="el-icon-search"></i>
+        /><i @click="searchMoth" class="el-icon-search"></i>
       </div>
       <el-dropdown class="phone-show phone-more">
         <i class="el-icon-more"></i>
@@ -21,14 +23,16 @@
               >主页</router-link
             ></el-dropdown-item
           >
-          <el-dropdown-item @click="showMessage">登录</el-dropdown-item>
-          <el-dropdown-item @click="showMessage">注册</el-dropdown-item>
-          <el-dropdown-item @click="showMessage">帮助</el-dropdown-item>
+          <el-dropdown-item @click.native="showMessage">登录</el-dropdown-item>
+          <el-dropdown-item @click.native="showMessage">注册</el-dropdown-item>
+          <el-dropdown-item @click.native="showHelpMessage"
+            >帮助</el-dropdown-item
+          >
         </el-dropdown-menu>
       </el-dropdown>
 
       <div class="right no-phone">
-        <span v-show="isVideoPage">
+        <span v-show="isInnerPage">
           <i class="el-icon-back" @click="pageBack" title="返回上一页"></i>
         </span>
         <span
@@ -62,10 +66,38 @@ export default {
     return {
       fixed: false,
       hidden: false,
+      searchText:"",
+      finaldata:[]
     };
   },
-  methods: {
+ watch: {
+    searchText(newValue, oldValue) {
+      console.log(this.$route.name)
+      if (newValue != "") {
+        setTimeout(() => {
+          this.searchText = "";
+        }, 5000);
+      }
+    },
+     
+  },
+   methods: {
+    searchMoth() {
+      
+      if (this.searchText == "") return;
+    
+        this.$router.push({
+	        name:'mobilesearch',
+		      params:{
+			searchtxt:this.searchText
+		
+          }})
+      
+      
+      
+    },
     showMessage() {
+      console.log("day");
       this.$store.state.showMessage.show = true;
       this.$store.state.showMessage.message = "功能尚待完善，敬请期待！";
 
@@ -104,8 +136,8 @@ export default {
     },
   },
   computed: {
-    isVideoPage() {
-      return this.$store.state.isVideoPage;
+    isInnerPage() {
+      return this.$store.state.isInnerPage;
     },
 
     isShowMessage() {
@@ -214,7 +246,7 @@ img {
   align-items: center;
   width: 100%;
   height: 60px;
-  box-shadow: 0 16px 48px #e7ebf6;
+  box-shadow: 0 2px 8px #e7ebf6;
   padding-right: 10px;
   padding-left: 10px;
 }

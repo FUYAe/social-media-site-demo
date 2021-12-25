@@ -4,7 +4,7 @@
     <!-- 使用elementui的走马灯 -->
     <el-carousel height="500px" :interval="5000" arrow="always">
       <el-carousel-item v-for="(item, index) in carouselImgs" :key="index">
-        <img :src="item" alt="" srcset="" />
+        <img :src="item" alt srcset />
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -47,7 +47,7 @@ img {
   /* 图片不拉伸 */
   object-fit: cover;
   width: 900px;
-  transition: all 0.6s;
+  transition: all 0.9s ease;
 }
 .slide-main:hover img {
   transform: scale(1.2);

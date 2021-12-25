@@ -1,6 +1,16 @@
 <template>
   <div class="item-main">
-    <img :src="item.logo" alt="" width="100px" height="100px" />
+    <!-- <img :src="item.logo" alt="" width="100px" height="100px" /> -->
+    <router-link
+      active-class="active"
+      :to="{
+        name: 'detail',
+        params: {
+          id: item.cid,
+        },
+      }"
+      ><img :src="item.logo" alt="" width="100px" height="100px"
+    /></router-link>
     <div class="brief">
       <h4>
         <b>{{ item.name }}</b>
@@ -48,12 +58,14 @@ export default {
   box-shadow: 0 2px 12px 0 rgba(70, 70, 70, 0.1);
   padding: 5px;
   margin: 10px;
+  transition: all 0.1s;
 }
 .item-main:hover {
   box-shadow: 0 2px 12px 0 rgba(70, 70, 70, 0.15);
-  position: relative;
+  /* position: relative;
   top: -0.4px;
-  left: -0.4px;
+  left: -0.4px; */
+  transform: scale(1.001);
 }
 img {
   border-radius: 10px;

@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container" style="height: 100%,width:100%">
+  <div class="main-container" style="height: 100%,">
     <!-- 页面加载动画 -->
     <BaseLoading />
     <!-- mainFooter -->
@@ -10,7 +10,7 @@
 
     <!-- 路由位 -->
     <div class="display-container">
-      <router-view></router-view>
+      <router-view :key="$route.fullPath"></router-view>
     </div>
     <BaseFooter />
   </div>
@@ -46,6 +46,9 @@ export default {
   }
 }
 /* 全局css配置 */
+.el-popover{
+  width: 20px;
+}
 em {
   color: rgba(0, 0, 0, 0.3);
 }

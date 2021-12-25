@@ -79,7 +79,7 @@ export default {
     },
   },
   mounted() {
-    // console.log(this);
+    console.log(this);
     let mid = this.$route.params.id - 1;
     if (mid > 6 || mid < 1) {
       mid = 1;

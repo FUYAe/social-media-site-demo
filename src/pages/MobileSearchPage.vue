@@ -1,45 +1,46 @@
 <template>
-  <div class="main-left">
-    <HomeCarousel />
     <div class="item-container">
-      <h3>
-        热门
-        <img src="../assets/huo.png" alt />新媒体公司
-      </h3>
-      <HomeMainItem v-for="(item, index) in mdata" :key="index" :item="item" />
-      <div>more</div>
-      <HomeMainSiteBrief />
+      <HomeMainItem v-for="(item, index) in finaldata" :key="index" :item="item" />
+      <h2 id="tip" style="display: none;">无结果</h2>
+      
     </div>
-  </div>
 </template>
-
 <script>
-import HomeMainItem from "./HomeMainItem.vue";
-import HomeMainSiteBrief from "./HomeMainSiteBrief.vue";
-import HomeCarousel from "@/components/HomeCarousel.vue";
+import HomeMainItem from "../components/HomeMainItem.vue";
+
 export default {
-  name: "HomeMain",
+  name: "MobileSearchPage",
   components: {
     HomeMainItem,
-    HomeMainSiteBrief,
-    HomeCarousel,
+ 
+  
   },
   data() {
     return {
-      mdata: [],
+
+      finaldata:[]
     };
   },
   mounted() {
-    this.mdata = this.$store.state.mainData;
+    let data = this.$store.state.mainData;
+      this.finaldata = data.filter((item) => {
+        return item.name.indexOf(this.$route.params.searchtxt.trim()) != -1;
+      });
+      if(this.finaldata.length==0){
+       document.getElementById("tip").setAttribute("style","display: block;")
+       setTimeout(()=>{
+         this.$router.push({
+	        name:'home',
+		
+          })},5000)
+      
+      }
   },
 };
 </script>
 
 <style scoped>
-.main-left {
-  float: left;
-  margin-top: 20px;
-}
+
 .item-container {
   box-shadow: 0 16px 48px #e7ebf6;
   border-radius: 10px;
@@ -66,13 +67,11 @@ img {
   height: 15px;
 }
 @media (max-width: 800px) {
-  .main-left {
-    float: none;
-  }
   .item-container {
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.01);
     /* height: 700px; */
     width: 100vw;
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
     background-color: #fff;

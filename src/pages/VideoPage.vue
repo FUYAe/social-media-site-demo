@@ -18,10 +18,10 @@ export default {
     this.myData = this.mdata.filter((item) => {
       return item.cid == this.$route.params.id;
     })[0];
-    this.$store.state.isVideoPage = true;
+    this.$store.state.isInnerPage = true;
   },
   beforeDestroy() {
-    this.$store.state.isVideoPage = false;
+    this.$store.state.isInnerPage = false;
   },
 };
 </script>

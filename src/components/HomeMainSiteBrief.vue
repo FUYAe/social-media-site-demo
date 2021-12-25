@@ -32,7 +32,7 @@ div {
   padding-right: 60px;
 }
 p {
-  line-height: 25px;
+  line-height: 35px;
 }
 @media (max-width: 800px) {
   div {

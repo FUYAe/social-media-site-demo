@@ -4,7 +4,7 @@
       <el-tab-pane label="业务介绍" name="first">
         <p v-html="dataItem.businessIntro"></p>
       </el-tab-pane>
-      <el-tab-pane label="涉及的技术" name="second">
+      <el-tab-pane label="涉及技术" name="second">
         <p v-html="dataItem.technology"></p>
       </el-tab-pane>
       <el-tab-pane label="技术效果" name="third">
@@ -34,6 +34,7 @@ export default {
   margin-top: 40px;
   padding: 60px;
   padding-top: 20px;
+  min-height: 800px;
 }
 
 p {

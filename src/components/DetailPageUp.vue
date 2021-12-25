@@ -3,7 +3,11 @@
     <img :src="dataItem.logo" alt="图片加载失败" />
     <div class="up-brief">
       <span>
-        <h1>{{ dataItem.name }}</h1>
+        <h1><el-popover
+    placement="right"
+    width="120"
+    trigger="hover"
+    content="点击直达官网"><a :href="dataItem.link" slot="reference">{{ dataItem.name }}</a></el-popover></h1>
         <h4 v-html="dataItem.brief"></h4>
       </span>
       <div class="max-show">
@@ -11,8 +15,15 @@
           <el-button ref="upbutton" @click="upPage($event)"
             ><i class="el-icon-arrow-left"></i
           ></el-button>
-          <a :href="dataItem.link" target="__blank"
-            ><el-button>直达官网</el-button></a
+          <router-link
+            active-class="active"
+            :to="{
+              name: 'prospect',
+              params: {
+                id: $route.params.id,
+              },
+            }"
+            ><el-button>前景分析</el-button></router-link
           >
           <router-link
             push
@@ -25,8 +36,15 @@
             }"
             ><el-button>视频介绍</el-button></router-link
           >
-          <a href=""
-            ><el-button><a>复制</a></el-button></a
+          <router-link
+            active-class="active"
+            :to="{
+              name: 'imgbrief',
+              params: {
+                id: $route.params.id,
+              },
+            }"
+            ><el-button>图文介绍</el-button></router-link
           >
           <el-button ref="downbutton" @click="nextPage($event)"
             ><i class="el-icon-arrow-right"></i
@@ -35,8 +53,15 @@
       </div>
       <div class="min-show">
         <el-row>
-          <a :href="dataItem.link" target="__blank"
-            ><el-button>直达官网</el-button></a
+          <router-link
+            active-class="active"
+            :to="{
+              name: 'prospect',
+              params: {
+                id: $route.params.id,
+              },
+            }"
+            ><el-button>前景分析</el-button></router-link
           >
           <router-link
             active-class="active"
@@ -48,8 +73,16 @@
             }"
             ><el-button>视频介绍</el-button></router-link
           >
-          <a href=""
-            ><el-button><a>复制</a></el-button></a
+
+          <router-link
+            active-class="active"
+            :to="{
+              name: 'imgbrief',
+              params: {
+                id: $route.params.id,
+              },
+            }"
+            ><el-button>图文介绍</el-button></router-link
           >
         </el-row>
         <el-row>
@@ -87,6 +120,7 @@ export default {
   justify-content: space-between;
   padding: 30px;
 }
+
 .up img {
   width: 400px;
   height: 400px;
