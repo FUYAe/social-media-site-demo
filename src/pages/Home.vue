@@ -1,7 +1,5 @@
 <template>
   <div class="home-main">
-    <!-- 轮播图 -->
-
     <!-- home的主要信息页 -->
     <HomeMain />
     <HomeSideBar />

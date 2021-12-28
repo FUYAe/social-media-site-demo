@@ -11,13 +11,10 @@ import HomeMainItem from "../components/HomeMainItem.vue";
 export default {
   name: "MobileSearchPage",
   components: {
-    HomeMainItem,
- 
-  
+    HomeMainItem, 
   },
   data() {
     return {
-
       finaldata:[]
     };
   },

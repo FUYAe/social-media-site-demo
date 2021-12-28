@@ -119,13 +119,7 @@ export default {
       }
     },
     showMessage() {
-      this.$store.state.showMessage.show = true;
-      this.$store.state.showMessage.message = "功能尚待完善，敬请期待！";
-
-      setTimeout(() => {
-        this.$store.state.showMessage.show = false;
-        this.$store.state.showMessage.message = "";
-      }, 1500);
+      this.$store.dispatch("showMessage","功能尚待完善，敬请期待！")
     },
   },
 };

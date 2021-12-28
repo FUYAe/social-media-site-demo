@@ -9,15 +9,11 @@ export default {
   name: "VideoPage",
   data() {
     return {
-      mdata: [],
       myData: {},
     };
   },
   mounted() {
-    this.mdata = this.$store.state.mainDatalight;
-    this.myData = this.mdata.filter((item) => {
-      return item.cid == this.$route.params.id;
-    })[0];
+    this.myData=this.$store.getters.getItemByCid("mainDatalight",this.$route.params.id)
     this.$store.state.isInnerPage = true;
   },
   beforeDestroy() {

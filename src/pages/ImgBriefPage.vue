@@ -61,15 +61,11 @@ export default {
   name: "ImgBriefPage",
   data() {
     return {
-      mdata: [],
       myData: {},
     };
   },
   mounted() {
-    this.mdata = this.$store.state.briefImgData;
-    this.myData = this.mdata.filter((item) => {
-      return item.cid == this.$route.params.id;
-    })[0];
+    this.myData=this.$store.getters.getItemByCid("briefImgData",this.$route.params.id)
     this.$store.state.isInnerPage = true;
   },
   beforeDestroy() {

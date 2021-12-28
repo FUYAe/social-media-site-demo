@@ -30,7 +30,7 @@ export default {
     };
   },
   mounted() {
-    this.mdata = this.$store.state.mainData;
+    this.mdata=this.$store.getters.getItems("mainData")
   },
 };
 </script>

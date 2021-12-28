@@ -3,8 +3,7 @@
     <div class="header-inner">
       <div class="left">
         <router-link active-class="active" to="/home"
-          ><img src="../assets/sitelogo.png" alt=""
-        /></router-link>
+          ><img src="../assets/sitelogo.png" alt=""/></router-link>
       </div>
       <div class="phone-show phone-input-outer">
         <input
@@ -30,7 +29,6 @@
           >
         </el-dropdown-menu>
       </el-dropdown>
-
       <div class="right no-phone">
         <span v-show="isInnerPage">
           <i class="el-icon-back" @click="pageBack" title="返回上一页"></i>
@@ -78,42 +76,22 @@ export default {
           this.searchText = "";
         }, 5000);
       }
-    },
-     
+    },     
   },
    methods: {
     searchMoth() {
-      
-      if (this.searchText == "") return;
-    
+      if (this.searchText == "") return;    
         this.$router.push({
 	        name:'mobilesearch',
 		      params:{
-			searchtxt:this.searchText
-		
+			      searchtxt:this.searchText
           }})
-      
-      
-      
     },
     showMessage() {
-      console.log("day");
-      this.$store.state.showMessage.show = true;
-      this.$store.state.showMessage.message = "功能尚待完善，敬请期待！";
-
-      setTimeout(() => {
-        this.$store.state.showMessage.show = false;
-        this.$store.state.showMessage.message = "";
-      }, 1500);
+      this.$store.dispatch("showMessage","功能尚待完善，敬请期待！")
     },
     showHelpMessage() {
-      this.$store.state.showMessage.show = true;
-      this.$store.state.showMessage.message = "请通过网页底部邮箱联系";
-
-      setTimeout(() => {
-        this.$store.state.showMessage.show = false;
-        this.$store.state.showMessage.message = "";
-      }, 3000);
+      this.$store.dispatch("showMessage","请通过网页底部邮箱联系")
     },
     pageBack() {
       this.$router.back();

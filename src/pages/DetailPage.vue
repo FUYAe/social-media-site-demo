@@ -17,7 +17,6 @@ export default {
   data() {
     return {
       activeName: "first",
-      dataAll: [],
       dataItem: {},
     };
   },
@@ -30,9 +29,7 @@ export default {
       if (mid < 1) {
         mid = 6;
       }
-      this.dataItem = this.dataAll.filter((item) => {
-        return item.cid == mid;
-      })[0];
+      this.dataItem = this.$store.getters.getItemByCid("mainData",mid)
 
       this.$route.params.id = mid;
       this.$router.replace({
@@ -59,9 +56,7 @@ export default {
       if (mid < 1) {
         mid = 6;
       }
-      this.dataItem = this.dataAll.filter((item) => {
-        return item.cid == mid;
-      })[0];
+      this.dataItem = this.$store.getters.getItemByCid("mainData",mid)
       this.$route.params.id = mid;
       this.$router.replace({
         name: "detail",
@@ -79,7 +74,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this);
     let mid = this.$route.params.id - 1;
     if (mid > 6 || mid < 1) {
       mid = 1;
@@ -91,11 +85,7 @@ export default {
         },
       });
     }
-
-    this.dataAll = this.$store.state.mainData;
-    this.dataItem = this.dataAll.filter((item) => {
-      return item.cid == this.$route.params.id;
-    })[0];
+    this.dataItem =this.$store.getters.getItemByCid("mainData",this.$route.params.id)
   },
 };
 </script>

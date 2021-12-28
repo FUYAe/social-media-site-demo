@@ -255,15 +255,37 @@ const actions = {
     setLoading: ({ commit }, v) => {
         commit('SET_LOADING', v);
     },
+    showMessage: ({ commit }, v) => {
+        commit("SHOWMESSAGE", v)
+    },
 }
 const mutations = {
     SET_LOADING: (state, v) => {
         state.loading = v;
     },
+    SHOWMESSAGE: (state, v) => {
+        state.showMessage.show = true
+        state.showMessage.message = v;
+        setTimeout(() => {
+            state.showMessage.show = false
+            state.showMessage.message = "";
+        }, 3000)
+    },
+}
+const getters = {
+    getItemByCid: state => (datasrc, cid) => {
+        return state[datasrc].filter((item) => {
+            return item.cid == cid;
+        })[0];
+    },
+    getItems: state => (datasrc) => {
+        return state[datasrc]
+    }
 }
 
 export default new Vuex.Store({
     actions,
     mutations,
-    state
+    state,
+    getters
 })
