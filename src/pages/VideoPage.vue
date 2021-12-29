@@ -13,7 +13,10 @@ export default {
     };
   },
   mounted() {
-    this.myData=this.$store.getters.getItemByCid("mainDatalight",this.$route.params.id)
+    this.myData = this.$store.getters.getItemByCid(
+      "mainDatalight",
+      this.$route.params.id
+    );
     this.$store.state.isInnerPage = true;
   },
   beforeDestroy() {

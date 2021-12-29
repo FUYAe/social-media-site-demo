@@ -29,7 +29,7 @@ export default {
       if (mid < 1) {
         mid = 6;
       }
-      this.dataItem = this.$store.getters.getItemByCid("mainData",mid)
+      this.dataItem = this.$store.getters.getItemByCid("mainData", mid);
 
       this.$route.params.id = mid;
       this.$router.replace({
@@ -56,7 +56,7 @@ export default {
       if (mid < 1) {
         mid = 6;
       }
-      this.dataItem = this.$store.getters.getItemByCid("mainData",mid)
+      this.dataItem = this.$store.getters.getItemByCid("mainData", mid);
       this.$route.params.id = mid;
       this.$router.replace({
         name: "detail",
@@ -67,10 +67,6 @@ export default {
       this.$nextTick(function () {
         e.target.blur();
       });
-      // this.$children[0].$children[0].$children[4].$el.blur();
-      // for (let i = 0; i < 2; i++) {
-      //   console.log(this.$children[0].$children[2].$children[i].$el);
-      // }
     },
   },
   mounted() {
@@ -85,7 +81,10 @@ export default {
         },
       });
     }
-    this.dataItem =this.$store.getters.getItemByCid("mainData",this.$route.params.id)
+    this.dataItem = this.$store.getters.getItemByCid(
+      "mainData",
+      this.$route.params.id
+    );
   },
 };
 </script>

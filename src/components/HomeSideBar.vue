@@ -26,7 +26,13 @@
             },
           }"
         >
-          <img :src="item.logo" width="15px" height="15px" alt="!" style="margin-bottom: 2px" />
+          <img
+            :src="item.logo"
+            width="15px"
+            height="15px"
+            alt="!"
+            style="margin-bottom: 2px"
+          />
           {{ item.name }}
         </router-link>
       </p>
@@ -41,7 +47,7 @@
     </div>
     <div class="item3">
       <img src="../assets/loginpng.png" alt />
-      <p>登录，添加你喜欢的词条！</p>
+      <p>登录，添加你喜欢的词条!</p>
       <el-row>
         <el-button @click="showMessage" type="primary">
           <i class="el-icon-user"></i> 登录
@@ -54,7 +60,11 @@
     <div class="item4">
       <p class="new-header">新发布</p>
 
-      <p class="new-item" v-for="item in $store.state.mainDatalight" :key="item.cid">
+      <p
+        class="new-item"
+        v-for="item in $store.getters.getItems('mainDatalight')"
+        :key="item.cid"
+      >
         <router-link
           active-class="active"
           :to="{
@@ -64,7 +74,13 @@
             },
           }"
         >
-          <img :src="item.logo" width="15px" height="15px" alt="!" style="margin-bottom: 2px" />
+          <img
+            :src="item.logo"
+            width="15px"
+            height="15px"
+            alt="!"
+            style="margin-bottom: 2px"
+          />
           {{ item.name }}
         </router-link>
       </p>
@@ -119,7 +135,7 @@ export default {
       }
     },
     showMessage() {
-      this.$store.dispatch("showMessage","功能尚待完善，敬请期待！")
+      this.$store.dispatch("showMessage", "功能尚待完善，敬请期待!");
     },
   },
 };
@@ -127,17 +143,10 @@ export default {
 <style scoped>
 .side-bar {
   transition: 0.6s all ease;
-  /* position: fixed;
-  left: 984.5px;
-  top: 48px; */
   width: 280px;
   float: right;
-  /* background-color: #fff; */
-  /* height: 1400px; */
 }
 .side-bar > div {
-  /* background-color: #fff; */
-  /* height: 200px; */
   border-radius: 10px;
   margin-bottom: 40px;
   transition: all 0.1s;
@@ -146,23 +155,24 @@ export default {
   transform: scale(1.01);
 }
 /* item1 */
-.input {
+.item1 {
+  position: relative;
+  margin-top: 40px;
+}
+.item1 .input {
   border: none;
   width: 80%;
   height: 30px;
   margin-top: 20px;
   border-bottom: rgb(212, 208, 208) 1px solid;
 }
-.el-icon-search {
+.item1 .el-icon-search {
   border-bottom: rgb(212, 208, 208) 1px solid;
   padding-bottom: 8px;
   font-weight: bolder;
   color: rgb(212, 208, 208);
 }
-.item1 {
-  position: relative;
-  margin-top: 40px;
-}
+
 .item1 > span {
   float: left;
   color: #409eff;
@@ -180,6 +190,7 @@ export default {
 .item1 > div > i:hover {
   color: black;
 }
+/* search-result */
 .search-result {
   transition: 0.6s all ease;
   background-color: #fff;
@@ -189,18 +200,18 @@ export default {
   min-height: 40px;
 }
 /* item1-search-item */
-.search-item {
+.search-result .search-item {
   text-align: left;
   text-indent: 2em;
   line-height: 25px;
   color: rgb(110, 110, 110);
 }
-.search-item > a {
+.search-result .search-item > a {
   text-align: left;
   line-height: 25px;
   color: rgb(110, 110, 110);
 }
-.search-item > a:hover {
+.search-result .search-item > a:hover {
   color: rgb(73, 73, 73);
 }
 
@@ -271,6 +282,7 @@ export default {
   color: rgb(73, 73, 73);
 }
 
+/* placeholder */
 ::-moz-placeholder {
   color: rgb(212, 208, 208);
 }

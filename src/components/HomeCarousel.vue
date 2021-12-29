@@ -1,6 +1,6 @@
 <template>
   <div class="slide-main">
-    <h1>新媒体，改变生活！</h1>
+    <h1>新媒体，改变生活!</h1>
     <!-- 使用elementui的走马灯 -->
     <el-carousel height="500px" :interval="5000" arrow="always">
       <el-carousel-item v-for="(item, index) in carouselImgs" :key="index">
@@ -14,7 +14,7 @@ export default {
   name: "HomeCarousel",
   computed: {
     carouselImgs() {
-      return this.$store.state.carouselImgs;
+      return this.$store.getters.getItems("carouselImgs");
     },
   },
 };

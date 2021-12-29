@@ -1,5 +1,5 @@
 <template>
-  <div class="main-container" style="height: 100%,">
+  <div class="main-container" style="height: 100%">
     <!-- 页面加载动画 -->
     <BaseLoading />
     <!-- mainFooter -->
@@ -46,7 +46,7 @@ export default {
   }
 }
 /* 全局css配置 */
-.el-popover{
+.el-popover {
   width: 20px;
 }
 em {

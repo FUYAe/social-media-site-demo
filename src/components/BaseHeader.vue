@@ -3,7 +3,8 @@
     <div class="header-inner">
       <div class="left">
         <router-link active-class="active" to="/home"
-          ><img src="../assets/sitelogo.png" alt=""/></router-link>
+          ><img src="../assets/sitelogo.png" alt=""
+        /></router-link>
       </div>
       <div class="phone-show phone-input-outer">
         <input
@@ -64,34 +65,35 @@ export default {
     return {
       fixed: false,
       hidden: false,
-      searchText:"",
-      finaldata:[]
+      searchText: "",
+      finaldata: [],
     };
   },
- watch: {
+  watch: {
     searchText(newValue, oldValue) {
-      console.log(this.$route.name)
+      console.log(this.$route.name);
       if (newValue != "") {
         setTimeout(() => {
           this.searchText = "";
         }, 5000);
       }
-    },     
+    },
   },
-   methods: {
+  methods: {
     searchMoth() {
-      if (this.searchText == "") return;    
-        this.$router.push({
-	        name:'mobilesearch',
-		      params:{
-			      searchtxt:this.searchText
-          }})
+      if (this.searchText == "") return;
+      this.$router.push({
+        name: "mobilesearch",
+        params: {
+          searchtxt: this.searchText,
+        },
+      });
     },
     showMessage() {
-      this.$store.dispatch("showMessage","功能尚待完善，敬请期待！")
+      this.$store.dispatch("showMessage", "功能尚待完善，敬请期待!");
     },
     showHelpMessage() {
-      this.$store.dispatch("showMessage","请通过网页底部邮箱联系")
+      this.$store.dispatch("showMessage", "请通过网页底部邮箱联系");
     },
     pageBack() {
       this.$router.back();

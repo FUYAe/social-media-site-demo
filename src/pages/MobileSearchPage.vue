@@ -1,9 +1,12 @@
 <template>
-    <div class="item-container">
-      <HomeMainItem v-for="(item, index) in finaldata" :key="index" :item="item" />
-      <h2 id="tip" style="display: none;">无结果</h2>
-      
-    </div>
+  <div class="item-container">
+    <HomeMainItem
+      v-for="(item, index) in finaldata"
+      :key="index"
+      :item="item"
+    />
+    <h2 id="tip" style="display: none">无结果</h2>
+  </div>
 </template>
 <script>
 import HomeMainItem from "../components/HomeMainItem.vue";
@@ -11,33 +14,31 @@ import HomeMainItem from "../components/HomeMainItem.vue";
 export default {
   name: "MobileSearchPage",
   components: {
-    HomeMainItem, 
+    HomeMainItem,
   },
   data() {
     return {
-      finaldata:[]
+      finaldata: [],
     };
   },
   mounted() {
     let data = this.$store.state.mainData;
-      this.finaldata = data.filter((item) => {
-        return item.name.indexOf(this.$route.params.searchtxt.trim()) != -1;
-      });
-      if(this.finaldata.length==0){
-       document.getElementById("tip").setAttribute("style","display: block;")
-       setTimeout(()=>{
-         this.$router.push({
-	        name:'home',
-		
-          })},5000)
-      
-      }
+    this.finaldata = data.filter((item) => {
+      return item.name.indexOf(this.$route.params.searchtxt.trim()) != -1;
+    });
+    if (this.finaldata.length == 0) {
+      document.getElementById("tip").setAttribute("style", "display: block;");
+      setTimeout(() => {
+        this.$router.push({
+          name: "home",
+        });
+      }, 5000);
+    }
   },
 };
 </script>
 
 <style scoped>
-
 .item-container {
   box-shadow: 0 16px 48px #e7ebf6;
   border-radius: 10px;

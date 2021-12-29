@@ -6,7 +6,7 @@
         class="img"
         v-for="(img, index) in myData.imgs"
         :src="img"
-        alt=""
+        alt="图片加载失败"
         :key="index"
       />
     </div>
@@ -65,7 +65,10 @@ export default {
     };
   },
   mounted() {
-    this.myData=this.$store.getters.getItemByCid("briefImgData",this.$route.params.id)
+    this.myData = this.$store.getters.getItemByCid(
+      "briefImgData",
+      this.$route.params.id
+    );
     this.$store.state.isInnerPage = true;
   },
   beforeDestroy() {
@@ -87,12 +90,12 @@ export default {
   background-color: #fff;
   box-sizing: content-box;
 }
-.brief-main{
+.brief-main {
   padding: 60px;
   margin-top: 10px;
   box-sizing: border-box;
 }
-.img-mian{
+.img-mian {
   height: 384px;
 }
 .img-brief-main > h1 {
@@ -128,20 +131,18 @@ p.brief-who {
     padding: 0px;
     height: 100%;
     background-color: #fff;
-  
   }
   .img {
     width: 24vw;
     float: left;
   }
-  .img-mian{
+  .img-mian {
     height: 22vh;
     padding: 2vw;
-    
   }
-   .brief-main{
-     margin-top: 10px;
-     padding: 20px;
-   }
+  .brief-main {
+    margin-top: 10px;
+    padding: 20px;
+  }
 }
 </style>
