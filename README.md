@@ -1,5 +1,6 @@
 # socialmediasite
 
+[demo](http://101.35.40.119/media/#/home)
 ## Project setup
 ```
 npm install
